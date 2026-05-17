@@ -63,7 +63,7 @@ app.get('/categories', async (req, res) => {
     const categories = await getAllCategories();
 
     console.log(categories);
-    const title = 'Branches of our services';
+    const title = 'Branch of our services';
     res.render('categories', { title, categories });
 });
 
