@@ -62,7 +62,7 @@ const  getProjectDetails = async (projectId) => {
   const query = `
     SELECT
           project_id,   
-          tutle,
+          title,
           project.description,
           date,
           location,

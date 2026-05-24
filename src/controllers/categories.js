@@ -1,12 +1,51 @@
-import { getAllCategories } from '../models/categories.js';
+ import {
+    getAllCategories,
+    getCategoryById,
+    getProjectsByCategoryId
+} from '../models/categories.js';
 
-// Define any controller functions
-const showCategoriesPage = async (req, res) => {
+
+
+// Show all categories page
+
+const showCategoriesPage = async (req, res, next) => {
+
     const categories = await getAllCategories();
+
     const title = 'Service Categories';
 
-    res.render('categories', { title, categories });
-};  
+    res.render('categories', {
+        title,
+        categories
+    });
+};
 
-// Export any controller functions
-export { showCategoriesPage };
+
+// Show single category details page
+const showCategoryDetailsPage = async (req, res, next) => {
+
+    const categoryId = req.params.id;
+
+    const category = await getCategoryById(categoryId);
+
+    if (!category) {
+        const error = new Error('Category not found');
+        error.status = 404;
+        return next(error);
+    }
+
+    const projects = await getProjectsByCategoryId(categoryId);
+
+    res.render('category', {
+        title: category.cat_name,
+        category,
+        projects
+    });
+};
+
+
+// Export controller functions
+export {
+    showCategoriesPage,
+    showCategoryDetailsPage
+};

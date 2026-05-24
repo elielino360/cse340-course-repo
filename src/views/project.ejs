@@ -1,6 +1,13 @@
+<%- include('partials/header') %>
+
 <p>
-    Partner Organization:
+    
+    <main>
+        Partner Organization:
     <a href="/organizations/<%= project.organization_id %>">
         <%= project.name %>
     </a>
+    </main>
+    
 </p>
+<%- include('partials/footer') %>
