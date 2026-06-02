@@ -1,3 +1,5 @@
+
+
 Create Table organization(
 organization_id SERIAL PRIMARY KEY,
 name VARCHAR (150) NOT NULL,
@@ -132,23 +134,25 @@ VALUES ( 'Environmental'),
 ('Health Care'),
 ('Community Services');
 
+select * from project;
+
 INSERT INTO project_categories (project_id, category_id)
-VALUES(17,1),
-(16,2),
-(22,3),
-(20,1),
-(18,1),
-(20,2),
-(21,4),
-(22,2),
-(23,3),
-(24,4),
-(25,4),
-(26,4),
-(27,4),
-(29,2),
-(28,4),
-(30,1);
+VALUES(1,1),
+(2,2),
+(3,3),
+(3,1),
+(4,1),
+(6,2),
+(5,4),
+(7,2),
+(8,3),
+(9,4),
+(10,4),
+(11,4),
+(12,4),
+(13,2),
+(14,4),
+(15,1);
 
 UPDATE categories
 SET cat_name = 'Advance Educational Services'
@@ -157,5 +161,6 @@ WHERE category_id = 2;
 UPDATE categories
 SET cat_name = 'Public Speaking'
 WHERE category_id = 4;
+
 
 
