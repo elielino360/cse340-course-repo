@@ -15,7 +15,10 @@
         <% }) %>
     </ul>
     <p>
-        <button><a href="/new-category"> Add New Category </a> </button>
+
+        <% if (user && user.role_name === 'admin') { %>
+    <a href="/new-category">Add New Category</a>
+<% } %>
     </p>
 
 </main>
