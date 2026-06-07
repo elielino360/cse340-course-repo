@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { createUser, authenticateUser  } from '../models/users.js';
+import { createUser, authenticateUser,getAllUsersWithRoles  } from '../models/users.js';
 
 const showUserRegistrationForm = (req, res) => {
     res.render('register', { title: 'Register' });
@@ -103,4 +103,22 @@ const requireRole = (role) => {
     };
 };
 
-export { showUserRegistrationForm, processUserRegistrationForm, showLoginForm, processLoginForm, processLogout , requireLogin, showDashboard, requireRole }; 
+const showAllUsers = async (req, res) => {
+    try {
+        const users = await getAllUsersWithRoles();
+
+        res.render('all-users', {
+            title: 'All Users',
+            users
+        });
+
+    } catch (error) {
+        console.error('Error fetching all users:', error);
+
+        req.flash('error', 'An error occurred while fetching users.');
+
+        res.redirect('/all-users');
+    }
+};
+
+export { showUserRegistrationForm, processUserRegistrationForm, showLoginForm, processLoginForm, processLogout , requireLogin, showDashboard, requireRole, showAllUsers  }; 
