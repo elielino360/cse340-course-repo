@@ -190,4 +190,14 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
+--- volunteer table creation
+CREATE TABLE volunteers (
+    user_id INT REFERENCES users(user_id),
+    project_id INT REFERENCES project(project_id),
+
+    PRIMARY KEY (user_id, project_id)
+);
+
+
+
 

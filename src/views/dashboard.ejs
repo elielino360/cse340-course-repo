@@ -4,8 +4,41 @@
     <h1><%= title %></h1>
 
     <h2>Dashboard</h2>
-    <p>Name: <%= name %></p>
+    <p>Role: <%= name %></p>
     <p>Username: <%= email %></p>
+
+    <h2>My volunteer projects</h2><% if (projects && projects.length > 0) { %>
+
+    <ul>
+
+        <% projects.forEach(project => { %>
+
+            <li>
+                <h3><%= project.title %></h3>
+
+                <strong>Description:</strong>
+                <p><%= project.description %></p>
+
+                <strong>Location:</strong>
+                <p><%= project.location %></p>
+
+                <strong>Date:</strong>
+                <p><%= project.date.toLocaleDateString() %></p>
+
+                <form action="/unvolunteer/<%= project.project_id %>" method="POST">
+                    <button type="submit">Remove as project</button>
+                </form>
+            </li>
+
+        <% }) %>
+
+    </ul>
+
+<% } else { %>
+
+    <p>You are not volunteering for any projects yet.</p>
+
+<% } %>
 
 </main>
 
