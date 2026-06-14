@@ -1,15 +1,32 @@
 import {addVolunteer, removeVolunteer, getVolunteerProjects} from '../models/volunteer.js';
 
 const volunteerAdder = async (req, res) => {
+
     const userId = req.session.user.user_id;
     const projectId = req.params.projectId;
 
-    await addVolunteer(userId, projectId);
+    try {
+        await addVolunteer(userId, projectId);
 
-    req.flash('success', 'You have successfully volunteered for this project!');
-    res.redirect(`/projects/${projectId}`);         
+        req.flash(
+            'success',
+            'You have successfully volunteered for this project!'
+        );
 
-};  
+    } catch (error) {
+
+        if (error.code === '23505') {
+            req.flash(
+                'error',
+                'You have already volunteered for this project.'
+            );
+        } else {
+            throw error;
+        }
+    }
+
+    res.redirect(`/projects/${projectId}`);
+};
 
 const userDashboard = async (req, res) => {
 
